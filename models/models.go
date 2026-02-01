@@ -61,15 +61,15 @@ type EstadoSalud struct {
 func (EstadoSalud) TableName() string { return "estados_salud" }
 
 type Especie struct {
-	ID               uint            `gorm:"primaryKey;column:id_especie" json:"id"`
-	NombreComun      string          `gorm:"size:100;not null;column:nombre_comun" json:"nombre_comun"`
-	NombreCientifico string          `gorm:"size:100;column:nombre_cientifico" json:"nombre_cientifico"`
-	IDFamilia        uint            `gorm:"column:id_familia" json:"id_familia"`
-	FamiliaBotanica  FamiliaBotanica `gorm:"foreignKey:IDFamilia" json:"familia"`
-	IDEstado         uint            `gorm:"column:id_estado" json:"id_estado"`
-	EstadoSalud      EstadoSalud     `gorm:"foreignKey:IDEstado" json:"estado"`
-	FechaRegistro    time.Time       `gorm:"column:fecha_registro;default:CURRENT_TIMESTAMP" json:"fecha_registro"`
-	ImagenURL        string          `gorm:"column:imagen_url" json:"imagen_url"`
+    IDEspecie        uint            `gorm:"primaryKey;column:id_especie" json:"id"`
+    NombreComun      string          `gorm:"size:100;not null;column:nombre_comun" json:"nombre_comun"`
+    NombreCientifico string          `gorm:"size:100;column:nombre_cientifico" json:"nombre_cientifico"`
+    IDFamilia        uint            `gorm:"column:id_familia" json:"id_familia"`
+    FamiliaBotanica  FamiliaBotanica `gorm:"foreignKey:IDFamilia;references:ID" json:"familia"`
+    IDEstado         uint            `gorm:"column:id_estado" json:"id_estado"`
+    EstadoSalud      EstadoSalud     `gorm:"foreignKey:IDEstado;references:ID" json:"estado"`
+    FechaRegistro    time.Time       `gorm:"column:fecha_registro;default:CURRENT_TIMESTAMP" json:"fecha_registro"`
+    ImagenURL        string          `gorm:"column:imagen_url" json:"imagen_url"`
 }
 
 func (Especie) TableName() string { return "especies" }

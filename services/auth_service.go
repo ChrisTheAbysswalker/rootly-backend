@@ -18,6 +18,7 @@ type AuthService struct {
 type Claims struct {
 	UserID uint `json:"user_id"`
 	RolID  uint `json:"rol_id"`
+	Nombre  string `json:"nombre"`
 	jwt.RegisteredClaims
 }
 
@@ -45,6 +46,7 @@ func (s *AuthService) Login(email, password string) (string, error) {
 	claims := &Claims{
 		UserID: user.ID,
 		RolID:  user.IDRol,
+		Nombre: user.Username,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
