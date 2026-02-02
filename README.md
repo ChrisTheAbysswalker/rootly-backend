@@ -1,4 +1,4 @@
-# Documentación Técnica del Proyecto
+# Proyecto Rootly - Backend
 
 Este documento proporciona instrucciones claras y precisas para configurar y ejecutar el proyecto en un entorno local.
 
