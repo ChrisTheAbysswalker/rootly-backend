@@ -1,0 +1,75 @@
+# Documentación Detallada del Proyecto
+
+Este documento proporciona una descripción detallada de cada componente del proyecto.
+
+## Estructura del Proyecto
+
+El proyecto sigue una estructura modular para separar las preocupaciones y facilitar el mantenimiento.
+
+- **/main.go**: Punto de entrada de la aplicación.
+- **/server.go**: Configuración del servidor Gin y de las rutas.
+- **/go.mod**: Define el módulo del proyecto y sus dependencias.
+- **/go.sum**: Contiene los hashes de las dependencias para la verificación de la integridad.
+- **/.gitignore**: Especifica los archivos y directorios que Git debe ignorar.
+- **/controllers**: Contiene los controladores que manejan las solicitudes HTTP.
+- **/db**: Contiene la lógica para la conexión con la base de datos.
+- **/middleware**: Contiene el middleware para la autenticación.
+- **/models**: Define los modelos de datos de la aplicación.
+- **/routes**: Define las rutas de la API.
+- **/services**: Contiene la lógica de negocio de la aplicación.
+
+## Componentes
+
+### `main.go`
+
+Este es el punto de entrada de la aplicación. Llama a `db.DbConnection()` para establecer una conexión con la base de datos y luego a `RunServer()` para iniciar el servidor.
+
+### `server.go`
+
+Este archivo configura el servidor Gin. Inicializa los servicios y controladores, y luego configura las rutas llamando a las funciones `Setup...Routes` de la carpeta `routes`. Finalmente, inicia el servidor en el puerto 8000.
+
+### `go.mod` y `go.sum`
+
+Estos archivos son gestionados por Go para manejar las dependencias del proyecto. `go.mod` lista las dependencias y `go.sum` contiene los hashes de las dependencias para asegurar la integridad.
+
+### `controllers`
+
+Esta carpeta contiene los controladores que manejan las solicitudes HTTP.
+
+- **`auth_controller.go`**: Maneja las solicitudes de registro y de inicio de sesión.
+- **`especie_controller.go`**: Maneja las solicitudes relacionadas con las especies, incluyendo operaciones CRUD, estadísticas y obtención de datos relacionados.
+- **`staff_controller.go`**: Maneja las solicitudes para obtener la lista de personal.
+
+### `db`
+
+Esta carpeta contiene la lógica para la conexión con la base de datos.
+
+- **`db.go`**: Contiene la función `DbConnection()` que establece una conexión con la base de datos PostgreSQL utilizando GORM. También contiene la función `getEnv()` para cargar las variables de entorno desde un archivo `.env`.
+
+### `middleware`
+
+Esta carpeta contiene el middleware para la autenticación.
+
+- **`auth_middleware.go`**: Contiene el middleware `AuthMiddleware()` que verifica el token JWT en las solicitudes a las rutas protegidas.
+
+### `models`
+
+Esta carpeta define los modelos de datos de la aplicación.
+
+- **`models.go`**: Define las estructuras de Go que representan las tablas de la base de datos. Estas estructuras son utilizadas por GORM para interactuar con la base de datos.
+
+### `routes`
+
+Esta carpeta define las rutas de la API.
+
+- **`auth_routes.go`**: Define las rutas para el registro y el inicio de sesión.
+- **`especie_routes.go`**: Define las rutas para las operaciones relacionadas con las especies.
+- **`staff_routes.go`**: Define las rutas para obtener la lista de personal.
+
+### `services`
+
+Esta carpeta contiene la lógica de negocio de la aplicación.
+
+- **`auth_service.go`**: Contiene la lógica para el registro de usuarios y el inicio de sesión, incluyendo la generación de contraseñas hash y la creación de tokens JWT.
+- **`especie_service.go`**: Contiene la lógica para las operaciones relacionadas con las especies, como la obtención del inventario, la creación, actualización y eliminación de especies, y el cálculo de estadísticas.
+- **`staff_service.go`**: Contiene la lógica para obtener la lista de personal de la base de datos.
